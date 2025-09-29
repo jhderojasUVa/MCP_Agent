@@ -1,11 +1,11 @@
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langgraph.prebuilt import create_react_agent
-from langchain_openai import ChatOpenAI # Or any tool-calling LLM (e.g., Gemini)
+from langchain_google_genai import ChatGoogleGenerativeAI # Or any tool-calling LLM (e.g., Gemini)
 
 # 1. Define the connection parameters for your MCP server
 MCP_CONFIG = {
     "coffee_server": {
-        "url": "http://your-mcp-server-address/mcp",  # Replace with your server's URL
+        "url": "http://localhost:3000",  # Replace with your server's URL
         "transport": "streamable_http",
     }
 }
@@ -15,7 +15,7 @@ mcp_client = MultiServerMCPClient(MCP_CONFIG)
 
 # 3. Define the LLM (Large Language Model)
 # The LLM is the 'brain' that decides *when* to call the tool.
-llm = ChatOpenAI(model="gpt-4o") # A model with strong tool-calling capabilities
+llm = ChatGoogleGenerativeAI(model="gemini-pro") # A model with strong tool-calling capabilities
 
 # 4. Asynchronously load the tools from your server
 async def build_agent():
